@@ -1,9 +1,16 @@
 package br.pucpr.projetowebservice.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class UsuarioDTO {
 
     private Integer id;
+    @NotNull
+    @NotBlank(message = "ERROR-MESSAGE-001")
     private String nome;
+    @Email
     private String email;
 
     public Integer getId() {
