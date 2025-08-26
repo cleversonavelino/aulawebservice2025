@@ -22,6 +22,11 @@ public class UsuarioController {
     private List<UsuarioDTO> usuarios = new ArrayList<>();
 
     @PostMapping
+    @Operation(summary = "Salva um usuário", description = "Salva um usuário")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Usuário Salvo com sucesso!"),
+            @ApiResponse(responseCode = "400", description = "Os dados do usuário estão incorretos."),
+    })
     public ResponseEntity<UsuarioDTO> save(@Valid @RequestBody UsuarioDTO usuarioDTO) {
         usuarioDTO.setId(1);
         usuarios.add(usuarioDTO);
