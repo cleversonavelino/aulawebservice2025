@@ -12,12 +12,12 @@ public class UsuarioDTO {
 
     private Integer id;
 
-    @NotNull(message = "O nome precisa ser preenchido.")
-    @NotBlank(message = "O nome precisa ser preenchido.")
+    @NotNull(message = "NAME_REQUIRED")
+    @NotBlank(message = "NAME_REQUIRED")
     private String nome;
 
     @Email
-    @NotBlank
+    @NotBlank(message = "EMAIL_REQUIRED")
     private String email;
 
 

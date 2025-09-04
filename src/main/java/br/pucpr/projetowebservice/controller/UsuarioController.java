@@ -1,6 +1,8 @@
 package br.pucpr.projetowebservice.controller;
 
 import br.pucpr.projetowebservice.dto.UsuarioDTO;
+import br.pucpr.projetowebservice.exception.BusinessException;
+import br.pucpr.projetowebservice.exception.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +46,15 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public UsuarioDTO update(@PathVariable("id") Integer id, @RequestBody UsuarioDTO usuarioDTO) {
+    public ResponseEntity<UsuarioDTO> update(@PathVariable("id") Integer id, @RequestBody UsuarioDTO usuarioDTO)
+            throws BusinessException {
+        if (id == null || usuarioDTO.getId() == null) {
+            throw new BusinessException("ID_REQUIRED","O ID é necessário");
+        }
+
         usuarioDTO.setId(id);
-        return usuarioDTO;
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 
     @DeleteMapping("/{id}")
