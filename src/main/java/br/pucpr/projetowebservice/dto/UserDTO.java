@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UsuarioDTO {
+public class UserDTO {
 
     private Integer id;
 
