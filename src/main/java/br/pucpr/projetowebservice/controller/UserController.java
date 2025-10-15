@@ -2,11 +2,15 @@ package br.pucpr.projetowebservice.controller;
 
 import br.pucpr.projetowebservice.dto.UserDTO;
 import br.pucpr.projetowebservice.exception.BusinessException;
+import br.pucpr.projetowebservice.model.User;
+import br.pucpr.projetowebservice.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +21,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/user")
 @Tag(name = "Usuário", description = "APIs de gerenciamento de usuários")
+@AllArgsConstructor
 public class UserController {
+
+    private final UserService userService;
+
+
 
     private List<UserDTO> usuarios = new ArrayList<>();
 
@@ -28,8 +37,8 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Os dados do usuário estão incorretos."),
     })
     public ResponseEntity<UserDTO> save(@Valid @RequestBody UserDTO usuarioDTO) {
-        usuarioDTO.setId(1);
-        usuarios.add(usuarioDTO);
+        User user = new ModelMapper().map(usuarioDTO, User.class);
+        userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 

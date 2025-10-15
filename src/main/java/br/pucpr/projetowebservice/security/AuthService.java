@@ -24,7 +24,7 @@ public class AuthService {
         UserAuthentication userAuthentication = new UserAuthentication();
         userAuthentication.setEmail(request.getEmail());
 
-        var jwtToken = jwtService.generateToken(userAuthentication);
+        String jwtToken = jwtService.generateToken(userAuthentication);
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setToken(jwtToken);
