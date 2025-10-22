@@ -26,8 +26,6 @@ public class UserController {
 
     private final UserService userService;
 
-
-
     private List<UserDTO> usuarios = new ArrayList<>();
 
     @PostMapping
