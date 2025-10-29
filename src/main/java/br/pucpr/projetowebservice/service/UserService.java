@@ -20,4 +20,8 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public void delete(Integer id) {
+        userRepository.deleteById(id);
+    }
 }

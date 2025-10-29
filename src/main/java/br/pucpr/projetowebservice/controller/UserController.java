@@ -59,13 +59,15 @@ public class UserController {
             throw new BusinessException("ID_REQUIRED","O ID é necessário");
         }
 
-        usuarioDTO.setId(id);
+        User user = new ModelMapper().map(usuarioDTO, User.class);
+        userService.save(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Integer id) {
+        userService.delete(id);
     }
 
 }
