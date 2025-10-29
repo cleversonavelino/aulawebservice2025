@@ -45,8 +45,11 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Recuperado com sucesso"),
     })
-    public List<UserDTO> findAll() {
-        return usuarios;
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<User> users = userService.findAll();
+        List<UserDTO> userVOs = users.stream().map(user -> new ModelMapper().map(user, UserDTO.class)).
+                toList();
+        return new ResponseEntity<>(userVOs, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

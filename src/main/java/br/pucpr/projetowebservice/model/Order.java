@@ -20,8 +20,7 @@ public class Order {
 
     private LocalDateTime date;
 
-    @ManyToOne
-    @JoinColumn(name = "USER")
-    private User user;
+
+
 
 }
