@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,11 +49,11 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Recuperado com sucesso"),
     })
-    public ResponseEntity<List<UserDTO>> findAll() {
-        List<User> users = userService.findAll();
-        List<UserDTO> userVOs = users.stream().map(user -> new ModelMapper().map(user, UserDTO.class)).
+    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
+        Page<User> users = userService.findAll(pageable);
+        List<UserDTO> userVOs = users.getContent().stream().map(user -> new ModelMapper().map(user, UserDTO.class)).
                 toList();
-        return new ResponseEntity<>(userVOs, HttpStatus.OK);
+        return new ResponseEntity<>(new PageImpl<>(userVOs, pageable, users.getTotalElements()), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
