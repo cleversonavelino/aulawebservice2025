@@ -3,6 +3,7 @@ package br.pucpr.projetowebservice.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -25,6 +26,6 @@ public class User {
     private String senha;
 
     @Column(name = "IDADE")
-    private Integer idade;
+    private LocalDate data;
 
 }

@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,7 @@ public class UserController {
     public ResponseEntity<UserDTO> save(@Valid @RequestBody UserDTO usuarioDTO) {
         User user = new ModelMapper().map(usuarioDTO, User.class);
         userService.save(user);
+        usuarioDTO.setId(user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioDTO);
     }
 

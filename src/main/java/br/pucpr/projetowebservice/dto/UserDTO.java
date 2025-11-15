@@ -7,12 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
 
-    private Integer id;
+    private Long id;
 
     @NotNull(message = "NAME_REQUIRED")
     @NotBlank(message = "NAME_REQUIRED")
@@ -22,5 +24,8 @@ public class UserDTO {
     @NotBlank(message = "EMAIL_REQUIRED")
     private String email;
 
+    @NotBlank(message = "SENHA_REQUIRED")
+    private String senha;
 
+    private LocalDate data;
 }

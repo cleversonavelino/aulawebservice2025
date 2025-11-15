@@ -36,7 +36,7 @@ public class UserControllerTest {
         List<User> users = new ArrayList<>();
         users.add(user);
         // Given
-        when(userService.findAll()).thenReturn(users);
+        //when(userService.findAll()).thenReturn(users);
 
         // When/Then
         mockMvc.perform(get("/api/v1/user")
